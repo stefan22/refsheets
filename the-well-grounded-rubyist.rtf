@@ -1,0 +1,456 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red255\green255\blue0;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sl276\slmult1\qc\lang9\ul\f0\fs48 The-Well-Grounded-Rubyst\par
+\pard\sl240\slmult1\ulnone\fs28 puts "hello"\tab\tab -> puts adds a newline to the string it outputs,\par
+print "hello"\tab\tab -> print exactly what it's told an leaves the cursor at the \tab\tab\tab\tab     end\par
+p "hello"\tab\tab -> outputs an inspect string\par
+string = gets\tab\tab -> you can assign the input line directly to a variable\par
+s = "100"\par
+x = s.to_i\tab\tab -> performs string-to-integer conversion\par
+if...end\tab\tab -> conditional statement always end with the word 'end'\par
+self\tab\tab\tab -> refers to the default object. Method calls that don't \tab\tab\tab\tab      specify a calling object are called on self.\par
+# A comment\tab -> comments are ignored by the interpreter.\par
+"100".to_i\tab\tab -> when u see a dot, you should interpret it as a \tab\tab\tab\tab\tab      message (on the right) being sent to an object (on the \tab\tab\tab      left).\par
+\highlight1 Classes\highlight0\tab\tab -> Classes define clusters of behaviour or functionality \tab\tab\tab\tab      and every object is an instance of exactly one class. Ruby provides a large number of built-in classes (classes like String, Array, Fixnum). Everytime you create a string object, you've created an instance of the class String. You can also write your own classes. And every object has a class.\par
+\highlight1 $ruby -cw temperature.rb\highlight0\tab -> check your ruby syntax for errors in a \tab\tab\tab\tab\tab\tab      given file. The -c flag means check for syntax errors. The -w flag activates a higher level warning. Assuming you've typed the file correctly, you should see the message: Syntax OK printed on your screen.\par
+\highlight1 example:\par
+\highlight0\tab print "enter a celsius temperature to convert to farenheit: "\par
+\tab celsius = gets\par
+\tab farenheit = (celsius.to_i *9/5) + 32\par
+\tab puts "your temperature in farenheit is #\{farenheit\} degrees."\par
+\par
+\ul Commonly used Ruby command-line switches\par
+\ulnone -c\tab check the syntax of a program file without executing program\tab ruby -c file\par
+-w\tab give warning messages during program execution\tab\tab ruby -w file\par
+-e\tab execute ruby code inline\tab\tab ruby -e 'puts "code demo!"'\par
+-v\tab show ruby version information\tab\tab ruby -v\par
+-l\tab line mode: print a newline after a line of output\tab ruby -le 'print'\par
+-rname\tab require the named feature\tab ruby -rprofile\par
+--version\tab show ruby version information\tab\tab ruby --version\par
+\highlight1 -e  example\par
+\highlight0\tab ruby -e 'puts "david is an idiot"'     or\par
+\tab ruby -e 'puts "david is an idiot".reverse'\par
+-h, --help\tab gives u a table listing all the command-line switches available to u.\par
+-cw\tab combo switches, which checks the syntax of the file without executing it.\par
+\highlight1 $ri String#diff\highlight0\tab\tab -> this how you request information about the diff \tab\tab\tab\tab\tab      method. The\highlight1  # \highlight0 sign between String and diff indicates that you're looking for an\ul  instance method\ulnone , as distinct from a class method.\par
+\ul For a class method you'd use the separator :: instead of #.\par
+\ulnone\par
+\highlight1 Rake\highlight0  -> it comes from "ruby make". It's a make-inpired task management utility.\par
+It reads and executes tasks defined in a file.\par
+\highlight1 gem \highlight0 -> third party libraries\par
+\tab ex: gem install ruport...........once you got a gem installed, you can use it via the require method. ex: require "hoe"\par
+\highlight1 Objects\par
+\highlight0\tab ticket = Object.new\tab\tab -> creating the ticket object\par
+def ticket.venue\par
+  "town hall"\par
+end\par
+def ticket.performer\par
+  "mark twain"\par
+end\par
+def ticket.price\par
+  5.50\par
+end\par
+\par
+puts "this ticket is for #\{ticket.event\} at #\{ticket.venue\}." + \par
+"the performer is #\{ticket.performer\}"\par
+-----------------------------------------------------------------------------------------------\par
+the return value of puts is always nill\par
+nil has a boolean value of false\par
+Object.new.methods.sort  -> it gives u a list of the methods this new object comes \tab\tab\tab\tab         bundled with.\par
+a = Object.new\par
+a.object_id \tab\tab -> a unique id number in every object.\par
+string1 = "hello", string2 = "hello"\par
+string1.object_id = 1234555,   string2.object_id = 5643223.  # they are different\par
+One of the points of giving objects id numbers in ruby is to be able to make unique identifications and to be able to determine when two objects are the same object.\par
+\highlight1 respond_to? \highlight0 method\par
+obj = Object.new\par
+=> obj.talk\tab\tab -> NoMethodError:  undefined method 'talk' for #<object...\par
+You can determine in advance whether the object knows how to handle the message using respond_to? method\par
+obj = Object.new\par
+if obj.respond_to?("talk")\par
+\tab obj.talk\par
+else\par
+\tab puts "Sorry, the object doesn't understand the 'talk' message.\par
+------------------------------------------------------------------------------------------------\par
+\highlight1 example:\par
+\highlight0\tab print "Information desired: "\par
+\tab request = gets.chomp\par
+chomp 'chomps' or bites off the trailing newline character, and saves the resulting string in the variable request.\par
+\tab if request == "venue"\par
+\tab\tab puts ticket.venue\par
+\tab elsif request == "performer"\par
+\tab\tab puts ticket.performer\par
+\tab ...\par
+\ul Or you can also do this instead of above code\par
+\ulnone\tab if ticket.respond_to?(request)\par
+\tab\tab puts ticket.send(request)\par
+\tab else\par
+\tab\tab puts "no such information available"\par
+\tab end\par
+------------------------------------------------------------------------------------------------\par
+\highlight1 arguments\par
+\highlight0\tab def obj.one_arg(x)\par
+\tab\tab puts "i require one and only one argument"\par
+\tab end\par
+\tab obj.one_arg(1,2,3)\tab\tab\tab -> ArgumentError: wrong number of \tab\tab\tab\tab\tab\tab\tab\tab      arguments (3 for 1)\par
+\tab def obj.multi_arg(*x)\par
+\tab\tab puts "i can take zero or more arguments"\tab\par
+\tab end\par
+\tab\ul This method above takes any number of arguments or none.\ulnone  (*x)\par
+\tab def two_ormore a,b,*c\par
+\tab\tab puts "i require two or more"\par
+\tab\tab p a,b,c\par
+\tab end\par
+\tab =>two_ormore 5, 7\tab\tab i require two or more \\n 5,7,[]\par
+\tab =>two_ormore 1,2,3,4,5\tab\tab i require two or more \\n 1,2,[3,4,5]\par
+\ul note: \ulnone using p instead of print or puts results in the array being printed out in array notation. Otherwise, each array element would appear on a separate line. \ul You can also make an argument optional by giving it a default value.\par
+\ulnone --------------------------------------------------------------------------------------------------------\par
+str = "hello"\par
+str.replace("Goodbye")\tab\tab\par
+def change_string(string)\par
+\tab string.replace "what da fuck"\par
+end\par
+name = "mario"\par
+change_string name\tab => what da fuck\par
+change_string(name.dup)\tab => mario\tab # protects it from being changed. \par
+numbers = ['one','two','three']\par
+numbers.freeze\tab\tab # prevents object from undergoing further change\par
+numbers[2] = "four"\tab =>RuntimeError: can't modify frozen array\par
+numbers[2].replace("four") => 'four'\tab #contents insidea array aren't frozen.\par
+------------------------------------------------------------------------------------------------------\par
+\highlight1 Class\highlight0  -> consists mainly of a a collection of method definitions. The class exists for the purpose of being instantiated: that is, of having objects created that are instances of the class. Instantiation -> obj = Object.new\par
+class Ticket\par
+\tab def event\par
+\tab\tab "cant nothing"\par
+\tab end\par
+end\par
+ticket1 = Ticket.new\par
+puts ticket1.event\tab\tab => cant nothing\par
+-------------------------------------------------------------------------------------------\par
+def ticket.price      -> \ul this method is defined directly on an individual object\ulnone . The \tab\par
+\tab\tab\tab    one above is defined in a general way - inside the ticket class.\par
+That's because this event method will be shared by all tickets. Are intended for use by all instances of the class - and are called\ul  instance methods\ulnone . They don't belong only to one object. Methods that you define for one particular object as in def ticket.price are called\ul  singleton methods\ulnone .\par
+Instance variables -> work much like other variables, you assign values to them and you read those values back. Instance variable names start with @.\par
+@instance_variables are only visible to the object to which they belong: object.self\par
+An instance variable initialized in one method, inside a particular class, is the same as the instance variable of the same name referred to in other method definitions of the same class.\par
+method initialize -> class Ticket\par
+\tab\tab\tab\tab def initialize\par
+\tab\tab\tab\tab   puts "creating a new ticket"\par
+\tab\tab\tab\tab end\par
+\tab\tab\tab  end\par
+If you define a method called initialize, this method will be executed every time you create a new instance of the class. You'll see that message every time you create a new ticket.\par
+Let's say we want to give each ticket object a venue and date when it's created. We can send the values as arguments to Ticket.new, and those same arguments will be sent to initiliaze automatically.\par
+\tab class Ticket\par
+\tab\tab def initialize(venue,date)\par
+\tab\tab\tab @venue = venue\par
+\tab\tab\tab @date = date\par
+\tab\tab end\par
+\tab\tab def venue\par
+\tab\tab\tab @venue\par
+\tab\tab end\par
+\tab\tab def date\par
+\tab\tab\tab @date\par
+\tab\tab end\par
+\tab end\par
+Adding venue and date allows us to read back those instance variable values.\par
+th = Ticket.new("Town Hall", "11/12/13")\par
+cc = Ticket.new("Convention Center", "12/13/14")\par
+puts "The first is for a #\{th.venue\} event on #\{th.date\}"\par
+puts "The second is for an event on #\{cc.date\} at #\{cc.venue\}"\par
+-----------------------------------------------------------------------------------------\par
+to avoid the initialization to get too long, we create a set_price method that allow us to set or reset the price of an existing ticket.\par
+\tab def set_price(amount)\par
+\tab\tab @price = amount\par
+\tab end\par
+\tab def price\par
+\tab\tab @price\par
+\tab end\par
+...inside Ticket class.\par
+ticket = Ticket.new("Town Hall", "11/12/13")\par
+ticket.set_price(63.00)\par
+puts "the ticket cost $#\{ticket.price\}"\par
+ticket.set_price(75.00)  #change price again by setting it up\par
+--------------------------------------------------------------------------------------------\par
+But you can also do it this way. Replace set_price with a method called price\par
+\tab def price= (amount)\par
+\tab\tab @price = amount\par
+\tab end\par
+price= does exactly what set_price did and you can call it just like any other method:\par
+\tab ticket.price= (63.00) or can also do this:\par
+\tab ticket.price = 63.00    #syntactic sugar for calling setter methods\par
+The equal sign gives you that familiar 'assigning a value to something' feeling so you know you're dealing with a setter method.\par
+--------------------------------------------------------------------------------------------------------\par
+\tab class Ticket\par
+\tab\tab def initialize(venue, date)\par
+\tab\tab\tab @venue = venue\par
+\tab\tab\tab @date = date\par
+\tab\tab end\par
+\tab\tab\par
+\tab\tab def price=(amount)\par
+\tab\tab\tab @price = amount\par
+\tab\tab end\par
+\par
+\tab\tab def venue\par
+\tab\tab\tab @venue\par
+\tab\tab end\par
+\tab\par
+\tab\tab def date\par
+\tab\tab\tab @date\par
+\tab\tab end\par
+\par
+\tab\tab def price\par
+\tab\tab\tab @price\par
+\tab\tab end\par
+\tab end\par
+\par
+We've got one read/write attribue (price) and two read attributes (venue and date). But too many repetitions so:\par
+-----------------------------------------------------------------------------------------------------\par
+\highlight1 attr_reader \highlight0 -> has no receiver (no left hand object and no dot in attr_reader). So \ul in absence of an explicit receiver, messages go to self, the default object\ulnone .\tab\par
+\par
+\tab class Ticket\par
+\tab\tab attr_reader :venue, :date, :price\tab #simplified read methods\par
+\tab\par
+\tab\tab attr_writer :price\par
+\par
+\tab\tab def initialize(venue, date)\par
+\tab\tab\tab @venue = venue\par
+\tab\tab\tab @date = date\par
+\tab\tab end\par
+\tab end\par
+\par
+You can see at a glance that ticket objects have venues, dates an prices. The first two are readable attributes, and price can be read or written.\par
+------------------------------------------------------------------------------------------------------\par
+Here the same Ticket but creating read, write attributes with one command.\par
+\par
+\tab class Ticket\par
+\tab\tab attr_reader :venue, :date\par
+\tab\tab attr_accessor :price\par
+\tab end\par
+\par
+--------------------------------------------------------------------------------------------------------\par
+\par
+attr_reader :venue\tab\tab\tab equals to\tab\tab\tab def venue\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab @venue\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab end\par
+\par
+attr_writer :price\tab\tab\tab equals to\tab\tab\tab def price=(price)\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab @price = price\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab end\par
+\par
+attr_accessor :price\tab\tab equals to\tab\tab\tab def price=(price)\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab @price = price\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab end\par
+\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab def price\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab @price\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab end\par
+\par
+----------------------------------------------------------------------------------------------------------\par
+\par
+\highlight1 Inheritance\highlight0  -> a kind of downward chaining relationship between two classes.\par
+(The superclass and the subclass), whereby one class 'inherits' from another and the instances of the subclass acquire the behavior ( methods) defined by the superclass.\par
+\tab\par
+\tab class Publication\par
+\tab\tab attr_accessor :publisher\par
+\tab end\par
+\tab\par
+\tab class Magazine < Publication\par
+\tab\tab attr_accessor :editor\par
+\tab end\par
+\par
+The symbol < designates\ul  Magazine as a subclass of Publication\ulnone . Since Publication has read and write publisher methods, every Magazine object has those methods too, on top of editor read and write methods.\par
+\par
+\tab mag = Magazine.new\par
+\tab mag.publisher = "David Black"\par
+\tab mag.editor = "Joe Smith"\par
+\par
+\tab puts "Mag is published by #\{mag.publisher\}, and edited by #\{mag.editor\}."\par
+\par
+\highlight1 Single Inheritance \highlight0 -> Ruby doesn't allow multiple inheritance. Every ruby class can have only one superclass.\par
+Ruby provides\ul  modules \ulnone which are similar to classes (except that they have inheritance) that you can graft onto your class's family tree to provide as many methods for your objects as you need.\par
+\par
+\ul Classes are Objects \ulnone -> the kind of object that has the power to spawn new objects (instances).\par
+You can create classes two ways\par
+\tab class Ticket\par
+\tab\tab #ur code here\par
+\tab end\par
+or\tab\par
+\tab my_class = Class.new\tab\tab # just like with objects.\par
+\par
+\tab instance_of_my_class = my_class.new\par
+\par
+-------------------------------------------------------------------------------------------\par
+Singleton mehtod\par
+\tab\par
+\tab def Ticket.most_expensive(*tickets)\par
+\tab\tab tickets.max_by(&:price)\par
+\tab end\par
+\tab\par
+\tab th = ticket.new("town hall","11/12/12")\par
+\tab ....\par
+\tab th.price = 12.45\par
+\tab ...\par
+\tab highest = Ticket.most_expensive(th,cc,fg)\par
+\tab puts "the highest-priced ticket is the one for #\{highest.venue\}"\par
+\tab => the highest-priced ticket is the one for fairgrounds.\par
+\par
+The method most_expensive is defined directly on the class object Ticket, in singleton-method style. (commonly referred as a class method)\par
+\ul Note that the message most_expensive goes the the class Ticket, not to a particular ticket.\par
+\ulnone\par
+\highlight1 When and why to write a class method\highlight0\par
+this example is a good choice cause we have temperature-related utility methods pertaining to temperature as a concept but not to a specific temperature.\par
+\par
+\tab class Temperature\par
+\tab\tab def Temperature.c2f(f)\par
+\tab\tab\tab f * 9.0 / 5 + 32\par
+\tab\tab end\par
+\tab\tab\par
+\tab\tab def Temperature.f2c(c)\par
+\tab\tab\tab (c - 32) * 5 / 9.0\par
+\tab\tab end\par
+\tab end\par
+\par
+We can only access class methods through the class object but not through their instances\par
+\tab\par
+\tab wrong = fg.most_expensive\tab\tab # it won't work\par
+\par
+--------------------------------------------------------------------------------------------------------\par
+\par
+\highlight1 Constants \highlight0 -> are a common third ingredient in many classes. Constant begins with a capital letter. Let's say with decide to set a list of predefined venues for the Ticket class - a list that every object can refer to and select from.\par
+\par
+\tab class Ticket\par
+\tab\tab VENUES = ["Convention Center", "Fairgrounds", "Town Hall"]\par
+\tab end\par
+\par
+A constant defined in a class can be referreed to from inside the class's instance or class methods. Also it can be access from outside the class using double colon (::).\par
+\tab example:\par
+\tab\par
+\tab\tab puts Ticket::\tab VENUES\par
+\par
+\ul another example \ulnone -> here there is no warning cause we are not redefining a constant, we're modifying an array and it has no knowledge it has been assigned to a constant.\par
+\tab\tab venues = Ticket::VENUES\tab\par
+\tab\tab venues << "High School Gym"\par
+\par
+\par
+Modules\par
+\par
+Like classes, modules are bundles of methods and constants.\par
+Unlike classes, modules don't have instances, instead you specify that you want the functionality of a particular module to be added to the functionality of a class.\par
+Modules help with program design and flexibility\par
+The class Class is a subclass of the class Module\par
+\par
+\ul Writing a module\ulnone :\par
+\tab\tab\tab\par
+\tab\tab\tab module MyFirstModule\par
+\tab\tab\tab\tab def say_hello\par
+\tab\tab\tab\tab\tab puts "hello"\par
+\tab\tab\tab\tab end\par
+\tab\tab\tab end\par
+\par
+Modules don't get instances, they get mixed in to classes using the \ul 'include' \ulnone method. Modules included in this way are referred to as \ul 'mix-ins'\ulnone .\par
+Whe this happens, the instances of the class have the ability to call the instance methods defined in the module.\par
+example:\par
+\tab\tab\tab class ModuleTester\par
+\tab\tab\tab\tab include MyFirstModule\par
+\tab\tab\tab end\par
+\par
+\tab mt = ModuleTester.new\par
+\tab mt.say_hello\par
+\par
+The main difference between inheriting from a class and mixing in a module is that you can mix in more than one module. No class can inherit from more than one class.\par
+\par
+\par
+Stacklike module (last in first out)\par
+\par
+\tab module Stacklike\par
+\tab\tab def stack\par
+\tab  \tab    @stack ||= []\par
+\tab\tab end\par
+\tab\tab def add_to_stack(obj)\par
+\tab\tab    stack.push(obj)\par
+\tab\tab end\par
+\tab\tab def take_from_stack\par
+\tab\tab    stack.pop\par
+\tab\tab end\par
+\tab end\par
+\par
+It uses an array (an ordered collection of objects) to represent the stack.\par
+The array is preserved in the instance variable @stack and made accessible through the method stack.\par
+\par
+\tab array || = []   # if array has a boolean value of true then don't do anything but if it doesn't initialize it to a new array.\par
+\par
+\par
+\ul\par
+\ulnone\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\tab\par
+\ul\par
+\ulnone\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\ul\fs48\par
+}
+ 

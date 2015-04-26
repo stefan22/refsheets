@@ -1,0 +1,1 @@
+Type "ruby -S irb" to access irb without backspace, up/down key issues

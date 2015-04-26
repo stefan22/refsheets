@@ -1,0 +1,248 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fprq2\fcharset0 Calibri;}{\f1\fnil\fprq2\fcharset2 Wingdings;}{\f2\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red255\green255\blue0;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\qc\ul\b\f0\fs28 REFERENCE SHEET 1\ulnone\par
+\pard\b0\par
+\par
+\pard\ri-720\highlight1 methods.sort \highlight0\tab => get a sorted list of methods\par
+\pard\par
+\highlight1 index\highlight0\tab\tab\tab => finds the position of the argument in the array\par
+\tab\tab\tab Example:\par
+\tab\tab\tab [\lquote rock\rquote , \lquote paper\rquote , \lquote scissors\rquote ].index(\lquote paper\rquote )\tab => 1\par
+\pard\fi-2160\li2160\par
+\highlight1 between?\highlight0\tab => takes two arguments. Here use this method to determine if the number 2 lies between the numbers 1 and 3.\par
+\pard\tab\tab\tab Example:\par
+\tab\tab\tab 2.between?(1, 3)\par
+\par
+\highlight1 String Interpolation\highlight0\tab => a=1, b=4\par
+\tab\tab\tab\par
+\tab\tab\tab Puts \ldblquote The number #\{a\} is less than the number #\{b\}\rdblquote\par
+\pard\fi-360\li2520\f1\par
+\'f0\tab\f0 The number 1 is less than the number 4\par
+\pard\par
+\highlight1 Method Example\highlight0 :   \ul Gives you the length of an inserted string\ulnone .\par
+\par
+\pard\fi720 def string_length(string)\par
+\pard\tab\tab\ldblquote The #\{string\} has this many characters: #\{string.length\}\rdblquote\par
+\pard\fi720 end\par
+=> string_length "whatever"\tab\tab\tab\tab\tab\tab\tab\par
+\tab\par
+\pard\highlight1 Example: \highlight0\ul check if a string contains any given character.\par
+\ulnone\par
+\tab "Luke: I can't believe it. Yoda: That is why you fail".include? "Yoda"\par
+\par
+\highlight1 Example: \highlight0\ul if string below starts with "Ruby"\par
+\ulnone\par
+\tab "Ruby is a beautiful language".start_with? "Ruby"\par
+\par
+\highlight1 Example:\ul  \highlight0 if string below ends with "Ruby"\par
+\ulnone\par
+\tab "I can't work with any other language but Ruby".ends_with? "Ruby"\par
+\par
+\highlight1 Example: \highlight0 Try to \ul find the index of "R" \ulnone in the string below\par
+\par
+\tab "I am a Rubyist".index "R"\par
+\par
+\highlight1 Example: \highlight0 mixed case string. Use this method \ul to swap the case of every \ulnone\tab\tab      \ul  character in it\ulnone .\par
+\tab\par
+\tab "ThiS iS A vErY ComPLEx SenTeNcE".swapcase\par
+\par
+\par
+\highlight1 Example: \highlight0 Splitting Strings. \ul Split the string below on space ' ' to get a \ulnone\tab   \tab    \par
+                  \ul collection of words\ulnone\par
+\par
+\tab "Fear is the path to the dark side".split(" ")\par
+       => ["Fear", "is", "the", "path", "to", "the", "dark", "side"]\par
+\par
+\highlight1 Example: \highlight0 Concatenating strings\par
+\tab\par
+\tab "Ruby" + "Monk"\tab\tab => RubyMonk\par
+\par
+\highlight1 Example: \highlight0 Using the literal method for string concatenation\par
+\par
+\tab "Ruby".concat("Monk")\tab => RubyMonk\tab or\par
+\par
+\tab "Ruby" << "Monk"\tab\tab => RubyMonk\par
+\par
+\highlight1 Example: \highlight0 Replacing a substring - Replace "I" with "We" in a given string\par
+\tab      \ul  It only replaces the first occurence\ulnone .\par
+\par
+\tab "I should look into your problem when I get time".sub("I", "We")\par
+\par
+\highlight1 Example: \highlight0\ul Replace all occurrences of "I" with "We"\ulnone\par
+\par
+\tab "I should look into your problem when I get time".gsub("I", "We")\par
+\par
+\highlight1 Example: \highlight0 Using RegExp -they go between "/ /"\par
+\tab        \ul Replaces all the vowels with the number 1\par
+\ulnone\par
+\tab "RubyMonk".gsub(/[aeiou]/,"1")\tab\tab => R1byM1nk\par
+\par
+\highlight1 Example: \highlight0 Using RegEx - \ul Replace all the characters in capital case with "0"\par
+\ulnone\par
+\tab "RubyMonk is Pretty Brilliant".gsub([A-Z], "0")\par
+\par
+\highlight1 Example:  \highlight0 Using RegEx - find the the characters from a string which are next \tab\tab       to a whitespace. \ul This method just return the first match.\ulnone\par
+\tab\par
+\tab "RubyMonk is Pretty Brilliant".match(/ ./)\tab\tab => I\par
+\par
+\highlight1 Or\highlight0\tab\ul In order to find further matches we pass a second parameter\ulnone , \tab\ul indicating the position in the string to begin the search\ulnone\par
+\tab\par
+\pard\fi720 "RubyMonk is Pretty Brilliant".match(/ ./, 9) \tab => P\par
+\par
+\pard\highlight1 Array \highlight0 => map (or collect) \par
+\tab\ul It creates a new array from the existing array.\par
+\ulnone\tab\par
+\tab example => [1,2,3].map \{|i| i * 3 \}\tab => [3,6,9]\par
+\par
+\highlight1 Array\highlight0  => select\par
+\tab\ul Filters elements in the array.\par
+\ulnone\par
+\tab example => select even numbers. It extracts even numbers from \tab\tab                        array\tab\par
+\par
+\tab [1,2,3,4].select \{ |number| number % 2 == 0\}\tab =>[2,4]\par
+\par
+\highlight1 Array\highlight0  => delete_if\par
+\par
+\tab example: delete all the elements less than 4 from array.\par
+\par
+\tab [1,2,3,4,5,6,7].delete_if \{|i| i < 4 \}\tab\par
+\par
+\par
+\highlight1 Array\highlight0  => for in array. \ul Copy the values less than 4 from old array into new \ulnone\tab\tab     \ul  array\ulnone . \ul for loops are hardly ever used!\par
+\pard\fi720\ulnone\par
+def array_copy(old)\par
+\tab new_array = []\par
+\tab for number in old\par
+\tab\tab new_array << number if number < 4\par
+ \tab end\par
+\tab return new_array\par
+end\par
+\par
+\pard\highlight1 Array\highlight0  => each \ul is the most commongly used loop in Ruby\par
+\par
+\ulnone\tab\ul Same example using each\ulnone - copy values less than 4 from old array\par
+\tab  into new array.\par
+\par
+\tab def array_copy(old)\par
+\tab\tab new_array = []\par
+\tab\tab old.each do |num|\par
+\tab\tab\tab new_array << num if num < 4\par
+\tab\tab end\par
+\tab\tab return new_array\par
+\tab end\par
+\par
+\par
+\highlight1 Iterating over a Hash\highlight0\par
+\tab You can use the each method to iterate over all elements in a hash. \tab However, unlike array.each when u iterate over a hash using each,\ul  it \ulnone\tab\ul passes two values to the block: the key and the value.\par
+\par
+\ulnone\tab\highlight1 example\highlight0 : \ul increase the value of each item by 10 percent\par
+\ulnone\tab\ul should produce a new collection with the original unchanged.\par
+\ulnone\par
+\tab restaurant = \{"ramen"=>3, "dal sam"=>4, "coffee"=>2\}\par
+\par
+\tab restaurant.each do |item, price|\par
+\tab\tab restaurant[item] =  price + price * 0.1\par
+\tab end\ul\par
+\ulnone\par
+\pard\fi720 =>\{"ramen"=>3.3, "dal sam"=>4.4, "coffee"=>2.2\}\par
+\par
+\pard\par
+\highlight1 Creating new hashes:\par
+\highlight0\par
+\tab normal = Hash.new\par
+\tab --------------------------------------------------------------------------------\tab\par
+\tab chuck_norris = Hash[ :punch, 99, :kick, 98,  :stop_bullets, true ]\par
+\par
+\tab ==> \{ :punch=>99, :kick=>98, :stop_bullets=>true \}\par
+\par
+\tab\par
+\highlight1 Classes\highlight0   \ul They act as the factories that build objects\ulnone .\ul  An object built by a \ulnone\tab    \ul\par
+\ulnone                 \ul certain class is called "an instance of that class".\ulnone\par
+\tab\par
+\tab puts 1.class\tab\tab\tab =>Fixnum\par
+\tab puts "".class\tab\tab =>String\par
+\tab puts [].class\tab\tab\tab =>Array\par
+\par
+\tab puts 1.is_a?(Integer)\tab => True\par
+\tab puts 1.is_a?(String)\tab => False\par
+\pard\fi720\par
+\ul New object\ulnone\tab -->\tab\tab Object.new\par
+\pard\par
+\pard\fi720\ul New class\ulnone\tab -->\tab\tab class Rectangle\par
+\tab\tab\tab\tab end\par
+--------------------------------------------------------------------------\par
+\par
+\pard Example:\par
+\tab\par
+\tab class Rectangle\par
+\tab\tab def initialize(length,width)\par
+\tab\tab\tab @length = length\par
+\tab\tab\tab @width = width\par
+\tab\tab end\par
+\tab\tab def perimeter\par
+\tab\tab\tab 2 * (@length + @width)\par
+\tab\tab end\par
+\tab\tab def area\par
+\tab\tab\tab @length * @width\par
+\tab\tab end\par
+\tab end\par
+\pard\fi720\par
+-------------------------------------------------------------------------\par
+puts 1.next\tab\tab\tab => 2\par
+\pard\par
+\highlight1 Example\highlight0 :\tab\ul a method that takes an object (an integer) and changes a\ulnone  \tab\tab\tab\ul positive value to a negative one, and vice-versa.\ulnone\par
+\par
+\tab def reverse(integer)\par
+\tab\tab return 0 - integer\par
+\tab end\par
+\tab\par
+\tab reverse(100)\tab\tab\tab => -100\par
+\tab reverse(-5)\tab\tab\tab\tab => 5\par
+\par
+\ul Method with default value\par
+\ulnone\par
+\tab def add_numbers(num1,num2,num3 = 0)\par
+\tab\tab num1 + num2 + num3\par
+\tab end\par
+\pard\fi720\par
+\par
+\pard\ul Splat operator \ulnone --a list of parameters passed to an object available as a list \tab\tab\tab        using the splat operator (*)\par
+\par
+\highlight1 example:\highlight0\tab        def add(num1, num2, num3)\par
+\tab\tab         \tab num1 + num2 + num3\par
+\tab\tab        end\par
+\par
+\tab\tab       number = [1, 2, 3]\par
+\par
+\tab\tab      => add(*numbers)\tab => 6\par
+\pard\fi720\par
+---------------------------------------------------------------------------------\par
+\pard\tab\tab     def add(*numbers)\par
+\tab\tab\tab numbers.inject \{|sum,num| sum + num \}\par
+\tab\tab     end\par
+\tab\par
+\tab\tab    => add(1)\tab\tab\tab => 1\par
+\tab\tab    => add(1,2)\tab\tab => 3\par
+\tab\tab    => add(1,2,3)\tab\tab => 6\par
+\tab\tab    => add(1,2,3,4)\tab\tab => 10\par
+\pard\fi720\par
+----------------------------------------------------------------------------------\par
+\par
+\pard\highlight1 example\highlight0 :\tab def intro(age, gender, *names)\par
+\tab\tab\tab "Meet #\{names.join(" ")\}, who's #\{age\} and #\{gender\}"\par
+\tab\tab end\par
+\par
+\tab\tab ==> intro(22, "male","stefan", "vincent")\par
+\tab\tab ==> "Meet stefan vincent, who's 22 and male"\par
+\pard\fi720\par
+\pard\par
+\pard\fi720\par
+\par
+\par
+\par
+\par
+\par
+\pard\tab\par
+\pard\sa200\sl276\slmult1\lang9\f2\fs22\par
+}
+ 
